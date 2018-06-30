@@ -30,15 +30,15 @@ try:
 		rightBool = GPIO.input(rightSigPin)
 		hazBool = GPIO.input(hazSigPin)
 
-		if (leftBool == GPIO.HIGH || rightBool == GPIO.HIGH || hazBool == GPIO.HIGH):
-			if (leftBool == GPIO.HIGH || hazBool == GPIO.HIGH):
+		if (leftBool == GPIO.HIGH or rightBool == GPIO.HIGH or hazBool == GPIO.HIGH):
+			if (leftBool == GPIO.HIGH or hazBool == GPIO.HIGH):
 				GPIO.output(leftOutPin, 1)
-			if (rightBool == GPIO.HIGH || hazBool == GPIO.HIGH):
+			if (rightBool == GPIO.HIGH or hazBool == GPIO.HIGH):
 				GPIO.output(rightOutPin, 1)
 			time.sleep(.25)
-			if (leftBool == GPIO.HIGH || hazBool == GPIO.HIGH):
+			if (leftBool == GPIO.HIGH or hazBool == GPIO.HIGH):
 				GPIO.output(leftOutPin, 0)
-			if (rightBool == GPIO.HIGH || hazBool == GPIO.HIGH):
+			if (rightBool == GPIO.HIGH or hazBool == GPIO.HIGH):
 				GPIO.output(rightOutPin, 0)
 			time.sleep(.15)
 except KeyboardInterrupt:
