@@ -35,8 +35,11 @@ while a:
 		if (rightBool == GPIO.HIGH || hazBool == GPIO.HIGH):
 			GPIO.output(rightOutPin, 1)
 		time.sleep(.25)
-		GPIO.output(leftOutPin, 0)
-		time.sleep(.25)
+		if (leftBool == GPIO.HIGH || hazBool == GPIO.HIGH):
+			GPIO.output(leftOutPin, 0)
+		if (rightBool == GPIO.HIGH || hazBool == GPIO.HIGH):
+			GPIO.output(rightOutPin, 0)
+		time.sleep(.15)
 
 #except KeyboardInterrupt:
 #	GPIO.cleanup()
