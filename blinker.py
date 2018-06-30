@@ -18,7 +18,7 @@ GPIO.setup(leftOutPin, GPIO.OUT, initial=GPIO.LOW)
 GPIO.setup(rightOutPin, GPIO.OUT, initial=GPIO.LOW)
 
 leftBool = GPIO.input(leftSigPin)
-rightBool = GPIO.input(righSigPin)
+rightBool = GPIO.input(rightSigPin)
 hazBool = GPIO.input(hazSigPin)
 
 a = True
