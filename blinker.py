@@ -22,25 +22,25 @@ rightBool = GPIO.input(righSigPin)
 hazBool = GPIO.input(hazSigPin)
 
 a = True
-while a:
-	time.sleep(.1)
+try:
+	while a:
+		time.sleep(.1)
 
-	leftBool = GPIO.input(leftSigPin)
-	rightBool = GPIO.input(rightSigPin)
-	hazBool = GPIO.input(hazSigPin)
+		leftBool = GPIO.input(leftSigPin)
+		rightBool = GPIO.input(rightSigPin)
+		hazBool = GPIO.input(hazSigPin)
 
-	if (leftBool == GPIO.HIGH || rightBool == GPIO.HIGH || hazBool == GPIO.HIGH):
-		if (leftBool == GPIO.HIGH || hazBool == GPIO.HIGH):
-			GPIO.output(leftOutPin, 1)
-		if (rightBool == GPIO.HIGH || hazBool == GPIO.HIGH):
-			GPIO.output(rightOutPin, 1)
-		time.sleep(.25)
-		if (leftBool == GPIO.HIGH || hazBool == GPIO.HIGH):
-			GPIO.output(leftOutPin, 0)
-		if (rightBool == GPIO.HIGH || hazBool == GPIO.HIGH):
-			GPIO.output(rightOutPin, 0)
-		time.sleep(.15)
-
-#except KeyboardInterrupt:
-#	GPIO.cleanup()
-#GPIO.cleanup()
+		if (leftBool == GPIO.HIGH || rightBool == GPIO.HIGH || hazBool == GPIO.HIGH):
+			if (leftBool == GPIO.HIGH || hazBool == GPIO.HIGH):
+				GPIO.output(leftOutPin, 1)
+			if (rightBool == GPIO.HIGH || hazBool == GPIO.HIGH):
+				GPIO.output(rightOutPin, 1)
+			time.sleep(.25)
+			if (leftBool == GPIO.HIGH || hazBool == GPIO.HIGH):
+				GPIO.output(leftOutPin, 0)
+			if (rightBool == GPIO.HIGH || hazBool == GPIO.HIGH):
+				GPIO.output(rightOutPin, 0)
+			time.sleep(.15)
+except KeyboardInterrupt:
+	GPIO.cleanup()
+GPIO.cleanup()
