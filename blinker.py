@@ -3,30 +3,39 @@ import time
 
 GPIO.setmode(GPIO.BCM)
 
-GPIO.setup(4, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(25, GPIO.OUT, initial=GPIO.LOW)
+leftSigPin = 4
+rightSigPin = 5
+hazSigPin = 6
 
-#GPIO.add_event_detect(4, GPIO.BOTH)
+leftOutPin = 25
+rightOutPin = 24
 
-leftBool = 0
+GPIO.setup(leftSigPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(rightSigPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(hazSigPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-#def updateLeft(var):
-#	leftBool=GPIO.input(4)
-#	GPIO.output(25,leftBool)
-#	print GPIO.input(4)
-#	print leftBool
-#GPIO.add_event_callback(4,updateLeft)
+GPIO.setup(leftOutPin, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(rightOutPin, GPIO.OUT, initial=GPIO.LOW)
+
+leftBool = GPIO.input(leftSigPin)
+rightBool = GPIO.input(righSigPin)
+hazBool = GPIO.input(hazSigPin)
 
 a = True
 while a:
 	time.sleep(.1)
-	if (GPIO.input(4) == GPIO.HIGH):
-	#if leftBool == 1:
-		GPIO.output(25, 1)
-		print "on"
+
+	leftBool = GPIO.input(leftSigPin)
+	rightBool = GPIO.input(rightSigPin)
+	hazBool = GPIO.input(hazSigPin)
+
+	if (leftBool == GPIO.HIGH || rightBool == GPIO.HIGH || hazBool == GPIO.HIGH):
+		if (leftBool == GPIO.HIGH || hazBool == GPIO.HIGH):
+			GPIO.output(leftOutPin, 1)
+		if (rightBool == GPIO.HIGH || hazBool == GPIO.HIGH):
+			GPIO.output(rightOutPin, 1)
 		time.sleep(.25)
-		GPIO.output(25, 0)
-		print "off"
+		GPIO.output(leftOutPin, 0)
 		time.sleep(.25)
 
 #except KeyboardInterrupt:
