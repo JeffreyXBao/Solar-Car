@@ -41,6 +41,7 @@ try:
 			if (rightBool == GPIO.HIGH or hazBool == GPIO.HIGH):
 				GPIO.output(rightOutPin, 0)
 			time.sleep(.15)
+
 except KeyboardInterrupt:
 	GPIO.cleanup()
 GPIO.cleanup()
