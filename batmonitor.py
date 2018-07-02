@@ -3,8 +3,11 @@ import os
 import Adafruit_ADS1x15
 import time
 import vedirect
+import thread
 
 adc = Adafruit_ADS1x15.ADS1115()
+
+ve = vedirect.vedirect("/dev/ttyUSB0", 1)
 
 # Or create an ADS1015 ADC (12-bit) instance.
 #adc = Adafruit_ADS1x15.ADS1015()
@@ -30,18 +33,34 @@ divider2ratio = 12
 voltageAux = 0
 voltageMainMPPT = 0
 voltageMainBackup = 0
+vAux = 0
+vMain = 0
+
+def updateMPPTCallback(data):
+	global voltageMainMPPT
+	voltageMainMPPT = data["V"]
+
+def callVE():
+	ve.read_data_callback(updateMPPTCallback)
+
+try:
+   thread.start_new_thread(callVE,())
+except:
+   print "Error: unable to start thread"
 
 while True:
-	vAux = adc.read_adc(0, gain=GAIN)
-	vMain = adc.read_adc(0, gain=GAIN)
+	#vAux = adc.read_adc(0, gain=GAIN)
+	#vMain = adc.read_adc(0, gain=GAIN)
 
 	voltageAux = divider1ratio*vAux*0.1875/1000
 	voltageMainBackup = divider2ratio*vMain*0.1875/1000
 
-	time.sleep(.1)
-	#print v1
+	time.sleep(5)
+
+	print "Main Voltage:"
+	print voltageMainMPPT
 
 	if (voltageAux < 12.15):
 		os.system('mpg123 -q lowMain.mp3 &') ##todo change to aux sound
-	if (voltageMainBackup < 48.6 || voltageMainMPPT < 48.6):
+	if (voltageMainBackup < 48.6 or voltageMainMPPT < 48.6):
 		os.system('mpg123 -q lowMain.mp3 &')

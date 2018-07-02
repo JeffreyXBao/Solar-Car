@@ -97,7 +97,7 @@ class vedirect:
 
 
 def print_data_callback(data):
-    print data
+   print data
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Process VE.Direct protocol')
