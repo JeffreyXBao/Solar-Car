@@ -1,3 +1,4 @@
+#https://github.com/karioja/vedirect/blob/master/vedirect.py
 import os
 import Adafruit_ADS1x15
 import time
@@ -23,13 +24,23 @@ adc = Adafruit_ADS1x15.ADS1115()
 GAIN = 2/3
 
 divider1ratio = 3.3333
+divider2ratio = 12
+
+voltageAux = 0
+voltageMainMPPT = 0
+voltageMainBackup = 0
 
 while True:
+	vAux = adc.read_adc(0, gain=GAIN)
+	vMain = adc.read_adc(0, gain=GAIN)
 
-	v1 = adc.read_adc(0, gain=GAIN)
-	voltage1 = divider1ratio*v1*0.1875/1000
-	print voltage1
+	voltageAux = divider1ratio*vAux*0.1875/1000
+	voltageMainBackup = divider2ratio*vMain*0.1875/1000
+
 	time.sleep(.1)
 	#print v1
-os.system('mpg123 -q lowMain.mp3 &')
 
+	if (voltageAux < 12.15):
+		os.system('mpg123 -q lowMain.mp3 &') ##todo change to aux sound
+	if (voltageMainBackup < 48.6 || voltageMainMPPT < 48.6):
+		os.system('mpg123 -q lowMain.mp3 &')

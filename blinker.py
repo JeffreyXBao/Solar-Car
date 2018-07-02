@@ -21,9 +21,8 @@ leftBool = GPIO.input(leftSigPin)
 rightBool = GPIO.input(rightSigPin)
 hazBool = GPIO.input(hazSigPin)
 
-a = True
 try:
-	while a:
+	while True:
 		time.sleep(.1)
 
 		leftBool = GPIO.input(leftSigPin)
