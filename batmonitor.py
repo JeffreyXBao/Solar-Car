@@ -2,6 +2,7 @@
 import os
 import Adafruit_ADS1x15
 import time
+import vedirect
 
 adc = Adafruit_ADS1x15.ADS1115()
 
