@@ -71,7 +71,7 @@ def updateVoltage(intervalB):
 		# if (voltageMainBackup < 48.6 or voltageMainMPPT < 48.6):
 		# 	os.system('mpg123 -q lowMain.mp3 &')
 
-def getAuxV:
+def getAuxV():
 	return voltageAux
 try:
    thread.start_new_thread(updateVoltage,(.5))
