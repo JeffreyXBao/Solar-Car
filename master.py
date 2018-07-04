@@ -3,4 +3,10 @@ import display
 #import batmonitor
 import gpshandler
 
-display.updateDisplay("ur super gay")
+speed = 0
+
+while (True):
+    global speed
+    speed = gpshandler.getSpeed()
+    display.updateDisplay(speed)
+    time.sleep(1)
