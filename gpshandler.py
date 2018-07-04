@@ -10,7 +10,7 @@ def updatePacket(interval):
     packet = gpsd.get_current()
     time.sleep(interval)
 try:
-   thread.start_new_thread(updatePacket,(interval))
+   thread.start_new_thread(updatePacket,(.1))
 except:
    print "Error: unable to start thread"
 

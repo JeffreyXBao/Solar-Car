@@ -8,5 +8,7 @@ speed = 0
 while (True):
     global speed
     speed = gpshandler.getSpeed()
-    display.updateDisplay(speed)
-    time.sleep(1)
+    mph = speed*0.621371
+    text = str(mph) + "mph"
+    display.updateDisplay()
+    time.sleep(.3)
