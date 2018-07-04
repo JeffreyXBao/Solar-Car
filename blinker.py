@@ -29,12 +29,16 @@ try:
 		rightBool = GPIO.input(rightSigPin)
 		hazBool = GPIO.input(hazSigPin)
 
+		#if (True):
 		if (leftBool == GPIO.HIGH or rightBool == GPIO.HIGH or hazBool == GPIO.HIGH):
+			#if (True):
 			if (leftBool == GPIO.HIGH or hazBool == GPIO.HIGH):
 				GPIO.output(leftOutPin, 1)
 			if (rightBool == GPIO.HIGH or hazBool == GPIO.HIGH):
 				GPIO.output(rightOutPin, 1)
 			time.sleep(.25)
+
+			#if (True):
 			if (leftBool == GPIO.HIGH or hazBool == GPIO.HIGH):
 				GPIO.output(leftOutPin, 0)
 			if (rightBool == GPIO.HIGH or hazBool == GPIO.HIGH):

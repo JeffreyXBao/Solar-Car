@@ -48,19 +48,20 @@ try:
 except:
    print "Error: unable to start thread"
 
-while True:
-	#vAux = adc.read_adc(0, gain=GAIN)
-	#vMain = adc.read_adc(0, gain=GAIN)
+if __name__ == "__main__":
+	while True:
+		#vAux = adc.read_adc(0, gain=GAIN)
+		#vMain = adc.read_adc(0, gain=GAIN)
 
-	voltageAux = divider1ratio*vAux*0.1875/1000
-	voltageMainBackup = divider2ratio*vMain*0.1875/1000
+		voltageAux = divider1ratio*vAux*0.1875/1000
+		voltageMainBackup = divider2ratio*vMain*0.1875/1000
 
-	time.sleep(5)
+		time.sleep(5)
 
-	print "Main Voltage:"
-	print voltageMainMPPT
+		print "Main Voltage:"
+		print voltageMainMPPT
 
-	if (voltageAux < 12.15):
-		os.system('mpg123 -q lowAux.mp3 &')
-	if (voltageMainBackup < 48.6 or voltageMainMPPT < 48.6):
-		os.system('mpg123 -q lowMain.mp3 &')
+		if (voltageAux < 12.15):
+			os.system('mpg123 -q lowAux.mp3 &')
+		if (voltageMainBackup < 48.6 or voltageMainMPPT < 48.6):
+			os.system('mpg123 -q lowMain.mp3 &')

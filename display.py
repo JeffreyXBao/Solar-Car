@@ -18,8 +18,7 @@ lcd = LCD.Adafruit_CharLCD(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7, lcd_c
 
 lcd.clear()
 
-lcd.message("skrrrrrrrrrrrrrr\nrrrrrrrrt")
+def updateDisplay(inputMessage):
+	lcd.clear()
+	lcd.message(inputMessage)
 
-time.sleep(5)
-
-lcd.clear()
