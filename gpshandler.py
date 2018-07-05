@@ -10,7 +10,7 @@ os.system('sudo gpsd /dev/ttyUSB0 -F /var/run/gpsd.sock')
 connectSuccess = False
 packet = None
 speed = 0
-
+errCount = 0
 
 def connectAttempt():
     global connectSuccess
@@ -19,23 +19,39 @@ def connectAttempt():
         connectSuccess = True
         print "successfully connected to gps service"
     except Exception as e:
+        connectSuccess = False
         print e
 
-def gpsThread():
+def restartGPS():
+    os.system('sudo killall gpsd')
+    os.system('sudo gpsd /dev/ttyUSB0 -F /var/run/gpsd.sock')
+    print "gps service restarted"
+
+def connectLoop():
+    global connectSuccess
+
+    connectSuccess = False
     counter = 0
+
     while not connectSuccess:
         if counter > 10:
             counter = 0
-            os.system('sudo killall gpsd')
-            os.system('sudo gpsd /dev/ttyUSB0 -F /var/run/gpsd.sock')
+            restartGPS()
         connectAttempt()
         counter += 1
         time.sleep(.1)
+
+def gpsThread():
+    connectLoop()
     updatePacket()
+
+def reconnect():
+    connectLoop
 
 def updatePacket():
     global packet
     global speed
+    global errCount
 
     while (True):
         lastErr = None
@@ -43,6 +59,12 @@ def updatePacket():
             packet = gpsd.get_current()
             speed = packet.movement()['speed']
         except Exception as err:
+            errCount += 1
+            if errCount > 20:
+                restartGPS()
+                reconnect()
+                errCount = 0
+
             if err != lastErr:
                 print err
             lastErr = err
