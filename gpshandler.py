@@ -35,9 +35,10 @@ def connectLoop():
     counter = 0
 
     while not connectSuccess:
-        if counter > 10:
+        if counter > 100:
             counter = 0
             restartGPS()
+            time.sleep(.5)
         connectAttempt()
         counter += 1
         time.sleep(.1)
@@ -61,7 +62,7 @@ def updatePacket():
         except Exception as err:
             print "error updating packet"
             errCount += 1
-            if errCount > 20:
+            if errCount > 100:
                 restartGPS()
                 time.sleep(.5)
                 reconnect()
