@@ -19,6 +19,7 @@ def connectAttempt():
         connectSuccess = True
         print "successfully connected to gps service"
     except Exception as e:
+        print "failed to connect to gps service"
         connectSuccess = False
         print e
 
@@ -54,21 +55,17 @@ def updatePacket():
     global errCount
 
     while (True):
-        lastErr = None
         try:
             packet = gpsd.get_current()
             speed = packet.movement()['speed']
         except Exception as err:
+            print "error updating packet"
             errCount += 1
             if errCount > 20:
                 restartGPS()
                 time.sleep(.5)
                 reconnect()
                 errCount = 0
-
-            if err != lastErr:
-                print err
-            lastErr = err
         time.sleep(.1)
 
 try:
