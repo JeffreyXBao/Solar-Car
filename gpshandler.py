@@ -11,6 +11,7 @@ connectSuccess = False
 packet = None
 speed = 0
 
+
 def connectAttempt():
     global connectSuccess
     try:
@@ -35,7 +36,6 @@ def gpsThread():
 def updatePacket():
     global packet
     global speed
-    packet = gpsd.get_current()
 
     while (True):
         lastErr = None
