@@ -34,6 +34,7 @@ def updatePacket():
         except Exception as err:
             if err != lastErr:
                 print err
+            lastErr = err
         time.sleep(.1)
 
 try:
