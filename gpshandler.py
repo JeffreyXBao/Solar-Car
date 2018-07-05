@@ -7,6 +7,7 @@ packet = None
 speed = 0
 
 def connectAttempt():
+    global connectSuccess
     try:
         gpsd.connect()
         connectSuccess = True
