@@ -21,4 +21,5 @@ lcd.clear()
 lcd.message("test\nmessage")
 
 def updateDisplay(inputMessage):
+	lcd.clear()
 	lcd.message(inputMessage)
