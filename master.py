@@ -14,4 +14,4 @@ while (True):
 
     text = str(mph) + "mph\nAux:" + str(voltageAux) + "V"
     display.updateDisplay(text)
-    time.sleep(.3)
+    time.sleep(.5)

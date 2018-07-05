@@ -2,6 +2,10 @@ import gpsd
 import time
 import thread
 
+os.system('sudo systemctl stop gpsd.socket')
+os.system('sudo systemctl disable gpsd.socket')
+os.system('sudo gpsd /dev/ttyUSB0 -F /var/run/gpsd.sock')
+
 connectSuccess = False
 packet = None
 speed = 0
