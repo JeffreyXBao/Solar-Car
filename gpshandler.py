@@ -32,7 +32,7 @@ def updatePacket():
             speed = packet.movement()['speed']
             print "speed updated"
         except Exception as err:
-            if err not == lastErr:
+            if err != lastErr:
                 print err
         time.sleep(.1)
 
