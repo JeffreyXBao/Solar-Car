@@ -3,14 +3,14 @@ import display
 #import batmonitor
 import gpshandler
 
-speed = 0
+speedM = 0
 voltageAux = 0
 
 while (True):
-    global speed
+    global speedM
     #voltageAux = batmonitor.getAuxV()
-    speed = gpshandler.getSpeed()
-    mph = speed*0.621371
+    speedM = gpshandler.getSpeed()
+    mph = speedM*0.621371
 
     text = str(mph) + "mph\nAux:" + str(voltageAux) + "V"
     display.updateDisplay(text)
