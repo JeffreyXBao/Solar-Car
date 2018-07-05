@@ -16,8 +16,15 @@ def connectAttempt():
         print e
 
 def gpsThread():
+    counter = 0
     while not connectSuccess:
+        if counter > 10:
+            counter = 0
+            os.system('sudo killall gpsd')
+            os.system('sudo gpsd /dev/ttyUSB0 -F /var/run/gpsd.sock')
         connectAttempt()
+        counter += 1
+        time.sleep(.1)
     updatePacket()
 
 def updatePacket():
