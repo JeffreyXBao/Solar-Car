@@ -61,6 +61,7 @@ def updatePacket():
             speed = packet.movement()['speed']
         except Exception as err:
             print "error updating packet"
+            print err
             errCount += 1
             if errCount > 100:
                 restartGPS()
