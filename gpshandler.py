@@ -62,6 +62,7 @@ def updatePacket():
             errCount += 1
             if errCount > 20:
                 restartGPS()
+                time.sleep(.5)
                 reconnect()
                 errCount = 0
 
