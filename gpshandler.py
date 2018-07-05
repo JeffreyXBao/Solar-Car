@@ -10,6 +10,7 @@ def connectAttempt():
     try:
         gpsd.connect()
         connectSuccess = True
+        print "successfully connected to gps service"
     except Exception as e:
         print e
 
@@ -27,6 +28,7 @@ def updatePacket():
         try:
             packet = gpsd.get_current()
             speed = packet.movement()['speed']
+            print "speed updated"
         except Exception as err:
             print err
         time.sleep(.1)
