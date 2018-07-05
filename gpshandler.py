@@ -37,7 +37,6 @@ def updatePacket():
         try:
             packet = gpsd.get_current()
             speed = packet.movement()['speed']
-            print "speed updated"
         except Exception as err:
             if err != lastErr:
                 print err
