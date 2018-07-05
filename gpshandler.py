@@ -26,12 +26,14 @@ def updatePacket():
     packet = gpsd.get_current()
 
     while (True):
+        lastErr = None
         try:
             packet = gpsd.get_current()
             speed = packet.movement()['speed']
             print "speed updated"
         except Exception as err:
-            print err
+            if err not == lastErr:
+                print err
         time.sleep(.1)
 
 try:
