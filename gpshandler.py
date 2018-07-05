@@ -48,7 +48,9 @@ def gpsThread():
     updatePacket()
 
 def reconnect():
-    connectLoop
+    restartGPS()
+    time.sleep(.5)
+    connectLoop()
 
 def updatePacket():
     global packet
@@ -64,8 +66,6 @@ def updatePacket():
             print err
             errCount += 1
             if errCount > 100:
-                restartGPS()
-                time.sleep(.5)
                 reconnect()
                 errCount = 0
         time.sleep(.1)
