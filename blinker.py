@@ -21,28 +21,58 @@ leftBool = GPIO.input(leftSigPin)
 rightBool = GPIO.input(rightSigPin)
 hazBool = GPIO.input(hazSigPin)
 
+leftGlitch = True
+rightGlitch = True
+hazGlitch = True
+
+
+def updatePins():
+	global leftBool
+	global rightBool
+	global hazBool
+	global leftGlitch
+	global rightGlitch
+	global hazGlitch
+
+	leftBool = GPIO.input(leftSigPin)
+	rightBool = GPIO.input(rightSigPin)
+	hazBool = GPIO.input(hazSigPin)
+
+	if leftBool == GPIO.LOW:
+			leftGlitch = False
+	if rightBool == GPIO.LOW:
+			rightGlitch = False
+	if hazBool == GPIO.LOW:
+			hazGlitch = False
+	time.sleep(.01)
+
+def glitchReduce():
 try:
 	while True:
-		time.sleep(.1)
+		global leftGlitch
+		global rightGlitch
+		global hazGlitch
 
-		leftBool = GPIO.input(leftSigPin)
-		rightBool = GPIO.input(rightSigPin)
-		hazBool = GPIO.input(hazSigPin)
+		leftGlitch = True
+		rightGlitch = True
+		hazGlitch = True
+
+		for x in range(10):
+			updatePins
 
 		#if (True):
-		if (leftBool == GPIO.HIGH or rightBool == GPIO.HIGH or hazBool == GPIO.HIGH):
+		if (leftGlitch or rightGlitch or hazGlitch):
 			#if (True):
-			if (leftBool == GPIO.HIGH or hazBool == GPIO.HIGH):
+			if (leftGlitch or hazGlitch):
 				GPIO.output(leftOutPin, 1)
-			if (rightBool == GPIO.HIGH or hazBool == GPIO.HIGH):
+			if (rightGlitch or hazGlitch):
 				GPIO.output(rightOutPin, 1)
+
 			time.sleep(.25)
 
-			#if (True):
-			if (leftBool == GPIO.HIGH or hazBool == GPIO.HIGH):
-				GPIO.output(leftOutPin, 0)
-			if (rightBool == GPIO.HIGH or hazBool == GPIO.HIGH):
-				GPIO.output(rightOutPin, 0)
+			GPIO.output(leftOutPin, 0)
+			GPIO.output(rightOutPin, 0)
+
 			time.sleep(.15)
 
 except KeyboardInterrupt:
