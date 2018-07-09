@@ -37,16 +37,15 @@ def updatePins():
 	leftBool = GPIO.input(leftSigPin)
 	rightBool = GPIO.input(rightSigPin)
 	hazBool = GPIO.input(hazSigPin)
-
+	print leftBool
 	if leftBool == GPIO.LOW:
-			leftGlitch = False
+		leftGlitch = False
 	if rightBool == GPIO.LOW:
-			rightGlitch = False
+		rightGlitch = False
 	if hazBool == GPIO.LOW:
-			hazGlitch = False
+		hazGlitch = False
 	time.sleep(.01)
 
-def glitchReduce():
 try:
 	while True:
 		global leftGlitch
@@ -58,11 +57,11 @@ try:
 		hazGlitch = True
 
 		for x in range(10):
-			updatePins
+			updatePins()
 
-		#if (True):
+		print leftGlitch
+
 		if (leftGlitch or rightGlitch or hazGlitch):
-			#if (True):
 			if (leftGlitch or hazGlitch):
 				GPIO.output(leftOutPin, 1)
 			if (rightGlitch or hazGlitch):
