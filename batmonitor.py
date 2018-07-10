@@ -47,7 +47,7 @@ vMain = 0.0
 #    thread.start_new_thread(callVE,())
 # except:
 #    print "Error: unable to start thread"
-def updateVoltage(intervalB):
+def updateVoltage():
 	global vAux
 	global voltageAux
 
@@ -61,7 +61,7 @@ def updateVoltage(intervalB):
 		voltageAux = divider1ratio*vAux*0.1875/1000
 		# voltageMainBackup = divider2ratio*vMain*0.1875/1000
 
-		time.sleep(intervalB)
+		time.sleep(.5)
 
 		# print "Main Voltage:"
 		# print voltageMainMPPT
@@ -70,11 +70,15 @@ def updateVoltage(intervalB):
 			os.system('mpg123 -q lowAux.mp3 &')
 		# if (voltageMainBackup < 48.6 or voltageMainMPPT < 48.6):
 		# 	os.system('mpg123 -q lowMain.mp3 &')
+		print voltageAux
 
 def getAuxV():
-	global voltageAux
-	return voltageAux
+    global voltageAux
+    return voltageAux
 try:
-   thread.start_new_thread(updateVoltage,(.5))
+   thread.start_new_thread(updateVoltage,())
 except:
    print "Error: unable to start thread"
+
+while True:
+	time.sleep(.2)

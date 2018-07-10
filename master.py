@@ -10,7 +10,7 @@ while (True):
     auxV = batmonitor.getAuxV()
     mph = speedM*0.621371
 
-    
     text = str(mph) + "mph\nAux:" + str(auxV) + "V"
+    print text
     display.updateDisplay(text)
     time.sleep(.5)
