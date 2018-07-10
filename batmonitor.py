@@ -7,7 +7,7 @@ import thread
 
 adc = Adafruit_ADS1x15.ADS1115()
 
-ve = vedirect.vedirect("/dev/ttyUSB0", 1)
+#ve = vedirect.vedirect("/dev/ttyUSB0", 1)
 
 # Or create an ADS1015 ADC (12-bit) instance.
 #adc = Adafruit_ADS1x15.ADS1015()
