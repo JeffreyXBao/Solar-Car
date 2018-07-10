@@ -72,6 +72,7 @@ def updateVoltage(intervalB):
 		# 	os.system('mpg123 -q lowMain.mp3 &')
 
 def getAuxV():
+	global voltageAux
 	return voltageAux
 try:
    thread.start_new_thread(updateVoltage,(.5))
