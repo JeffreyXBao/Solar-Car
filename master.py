@@ -1,17 +1,16 @@
 import time
 import display
-#import batmonitor
+import batmonitor
 import gpshandler
-
-speedM = 0
-voltageAux = 0
 
 while (True):
     global speedM
     #voltageAux = batmonitor.getAuxV()
     speedM = gpshandler.getSpeed()
+    auxV = batmonitor.getAuxV()
     mph = speedM*0.621371
 
-    text = str(mph) + "mph\nAux:" + str(voltageAux) + "V"
+    
+    text = str(mph) + "mph\nAux:" + str(auxV) + "V"
     display.updateDisplay(text)
     time.sleep(.5)
